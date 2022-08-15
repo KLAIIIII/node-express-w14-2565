@@ -1,13 +1,16 @@
-const { Router } = require('express')
+// const { Router } = require('express')
 const express = require('express') //express
 const http = require('http') //node.js
 const morgan = require('morgan')
 const app = express()
 const Route = express.Router()
 const sever = http.createServer(app)
+
 const PORT = process.env.PORT || 4000
 app.use(morgan('dev'))
+// 4.Buil-in
 app.use(express.json())
+const Router = express.Router()
 
 // Application-level middleware
 // app.get((req,res,next)=>{
@@ -17,7 +20,13 @@ app.use(express.json())
 
 Route.use('/',(req,res,next)=>{
     console.log('This is a Router middleware')
-    res.json({'status':true})
+    next()
+})
+
+app.use('/',Router)
+
+Route.use('/home',(req,res,next)=>{
+    res.send('Home')
     next()
 })
 
