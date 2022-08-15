@@ -7,8 +7,8 @@ const PORT = process.env.PORT || 4000
 const sever = http.createServer(app)
 
 // Bady-parser middleware
-add.arguments(bodyParser.urlencoded({extends:false}))
-app.arguments(bodyParser.json())
+app.use(bodyParser.urlencoded({extends:false}))
+app.use(bodyParser.json())
 
 app.get('/',(req,res)=>{
     res.send("Home")
