@@ -26,8 +26,11 @@ Route.use('/',(req,res,next)=>{
 app.use('/',Router)
 
 Route.use('/home',(req,res,next)=>{
-    res.send('Home')
-    next()
+    // res.send("Home")
+    res.json({
+        message:true,
+        app:"express-Router",
+    })
 })
 
 // app.use(myLogger)
