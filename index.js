@@ -8,20 +8,27 @@ const PORT = process.env.PORT || 4000
 app.use(morgan('dev'))
 app.use(express.json())
 
-const myLogger = function(req,res,next){
-    console.log('I Like u')
+const requireTime = (req,res,next)=>{
+    console.log("I like u")
     next()
 }
+
+// Application-level middleware
+app.get((req,res,next)=>{
+    console.log('Time:',Date(Date.now()))
+    res.send('Time:',Date(Date.now()))
+    next()
+})
 
 // app.use(myLogger)
 
 //register route
 //GET:http://localhost:4000
-app.get('/',myLogger,(req,res)=>{
+app.get('/',requireTime,(req,res)=>{
     res.status(200).send({message:"Home Page"})
 })
 
-app.get('/contact',myLogger,(req,res)=>{
+app.get('/contact',requireTime,(req,res)=>{
     res.status(200).json({
         message:"Contact page"
     })
